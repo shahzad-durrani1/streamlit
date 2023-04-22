@@ -91,10 +91,10 @@ with st.container():
         state_filter = st.selectbox(
     'Select a state',
     sorted(df['state'].unique())
-    
+
     with kpi1:
         st.subheader("KPI 1")
-        st.write("100")
+        st.write(complaints_by_state[state_filter])
     with kpi2:
         st.subheader("KPI 2")
         st.write("200")
