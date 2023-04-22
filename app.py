@@ -64,9 +64,6 @@ complaints_sum_in_progress = response_in_progress['count of complaint_id'].sum()
 
 print(complaints_sum_in_progress)
 
-list_of_states=list(requests.get("https://gist.githubusercontent.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_hash.json").json().keys())
-
-
 
 # Load data from a Google Sheets spreadsheet
 
@@ -77,6 +74,68 @@ list_of_states=list(requests.get("https://gist.githubusercontent.com/mshafrir/26
 
 # Display the data in a Streamlit table
 # st.table(data)
+state_mapping = {
+    'ALL':'All',
+    'AL': 'Alabama',
+    'AK': 'Alaska',
+    'AS': 'American Samoa',
+    'AZ': 'Arizona',
+    'AR': 'Arkansas',
+    'CA': 'California',
+    'CO': 'Colorado',
+    'CT': 'Connecticut',
+    'DE': 'Delaware',
+    'DC': 'District of Columbia',
+    'FM': 'Federated States of Micronesia',
+    'FL': 'Florida',
+    'GA': 'Georgia',
+    'GU': 'Guam',
+    'HI': 'Hawaii',
+    'ID': 'Idaho',
+    'IL': 'Illinois',
+    'IN': 'Indiana',
+    'IA': 'Iowa',
+    'KS': 'Kansas',
+    'KY': 'Kentucky',
+    'LA': 'Louisiana',
+    'ME': 'Maine',
+    'MH': 'Marshall Islands',
+    'MD': 'Maryland',
+    'MA': 'Massachusetts',
+    'MI': 'Michigan',
+    'MN': 'Minnesota',
+    'MS': 'Mississippi',
+    'MO': 'Missouri',
+    'MT': 'Montana',
+    'NE': 'Nebraska',
+    'NV': 'Nevada',
+    'NH': 'New Hampshire',
+    'NJ': 'New Jersey',
+    'NM': 'New Mexico',
+    'NY': 'New York',
+    'NC': 'North Carolina',
+    'ND': 'North Dakota',
+    'MP': 'Northern Mariana Islands',
+    'OH': 'Ohio',
+    'OK': 'Oklahoma',
+    'OR': 'Oregon',
+    'PW': 'Palau',
+    'PA': 'Pennsylvania',
+    'PR': 'Puerto Rico',
+    'RI': 'Rhode Island',
+    'SC': 'South Carolina',
+    'SD': 'South Dakota',
+    'TN': 'Tennessee',
+    'TX': 'Texas',
+    'UT': 'Utah',
+    'VT': 'Vermont',
+    'VI': 'Virgin Islands',
+    'VA': 'Virginia',
+    'WA': 'Washington',
+    'WV': 'West Virginia',
+    'WI': 'Wisconsin',
+    'WY': 'Wyoming'
+}
 
 
 
@@ -91,7 +150,7 @@ with st.container():
     with state_filter:
         state_filter = st.selectbox(
     'Select a state',
-    sorted(df['state'].unique()))
+    sorted(state_mapping.keys()))
 
     kpi1.metric("Count of Complaints", complaints_by_state[state_filter])
 
