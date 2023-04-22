@@ -92,7 +92,7 @@ with st.container():
     'Select a state',
     sorted(df['state'].unique()))
 
-    kpi1.metric("Count of Complaints", "complaints_by_state[state_filter]")
+    kpi1.metric("Count of Complaints", complaints_by_state[state_filter])
 
     with kpi2:
         st.subheader("Complaints with Closed Status")
