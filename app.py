@@ -153,16 +153,10 @@ with st.container():
     sorted(state_mapping.keys()))
 
     kpi1.metric("Count of Complaints", complaints_by_state[state_filter])
+    kpi2.metric("Complaints with Closed Status", "200")
+    kpi3.metric("Complaints with Closed Status", "200")
+    kpi4.metric("Complaints with Closed Status", "200")
 
-    with kpi2:
-        st.subheader("Complaints with Closed Status")
-        st.write("200")
-    with kpi3:
-        st.subheader("KPI 3")
-        st.write("300")
-    with kpi4:
-        st.subheader("KPI 4")
-        st.write("400")
     
 
 
