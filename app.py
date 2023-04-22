@@ -87,6 +87,11 @@ with st.container():
     
     # Add KPI widgets with placeholder values
     kpi1, kpi2, kpi3, kpi4, state_filter = st.beta_columns(5)
+    with state_filter:
+        state_filter = st.selectbox(
+    'Select a state',
+    sorted(df['state'].unique())
+    
     with kpi1:
         st.subheader("KPI 1")
         st.write("100")
@@ -99,10 +104,7 @@ with st.container():
     with kpi4:
         st.subheader("KPI 4")
         st.write("400")
-    with state_filter:
-        state_filter = st.selectbox(
-    'Select a state',
-    sorted(df['state'].unique())
+    
 )
 
 # Container 2: Two charts side by side
@@ -134,22 +136,22 @@ with st.container():
         st.line_chart({"x": [1, 2, 3], "y": [10, 20, 30]})
 
 
-# Define the state filter dropdown
-state_filter = st.selectbox(
-    'Select a state',
-    sorted(df['state'].unique())
-)
+# # Define the state filter dropdown
+# state_filter = st.selectbox(
+#     'Select a state',
+#     sorted(df['state'].unique())
+# )
 
-# Filter the DataFrame by state if a state is selected in the dropdown
-if state_filter:
-    df = df.loc[df['state'] == state_filter]
+# # Filter the DataFrame by state if a state is selected in the dropdown
+# if state_filter:
+#     df = df.loc[df['state'] == state_filter]
 
-# Display the total number of complaints and number of complaints per state
-st.write('### Summary')
-st.write('Total number of complaints:', len(df))
-st.write('Number of complaints in', state_filter, ':', len(df))
+# # Display the total number of complaints and number of complaints per state
+# st.write('### Summary')
+# st.write('Total number of complaints:', len(df))
+# st.write('Number of complaints in', state_filter, ':', len(df))
 
-# Display a bar chart of the number of complaints per sub-product in the selected state
-st.write('### Number of complaints per sub-product in', state_filter)
-chart_data = df['sub_product'].value_counts()
-st.bar_chart(chart_data)
+# # Display a bar chart of the number of complaints per sub-product in the selected state
+# st.write('### Number of complaints per sub-product in', state_filter)
+# chart_data = df['sub_product'].value_counts()
+# st.bar_chart(chart_data)
