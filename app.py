@@ -2,7 +2,7 @@ import streamlit as st
 import gspread as gs
 import pandas as pd
 from google.oauth2 import service_account
-
+import requests
 
 
 
@@ -64,6 +64,7 @@ complaints_sum_in_progress = response_in_progress['count of complaint_id'].sum()
 
 print(complaints_sum_in_progress)
 
+list_of_states=list(requests.get("https://gist.githubusercontent.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_hash.json").json().keys())
 
 
 
