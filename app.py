@@ -79,56 +79,60 @@ print(complaints_sum_in_progress)
 
 
 
-# # Container 1: KPIs with State Filter
-# with st.container():
-#     # Add title and filter widgets
-#     st.title("KPIs")
-#     state_filter = st.selectbox("Select state", ["State A", "State B", "State C", "State D"])
+# Container 1: KPIs with State Filter
+with st.container():
+    # Add title and filter widgets
+    st.title("KPIs")
     
-#     # Add KPI widgets with placeholder values
-#     kpi1, kpi2, kpi3, kpi4 = st.beta_columns(4)
-#     with kpi1:
-#         st.subheader("KPI 1")
-#         st.write("100")
-#     with kpi2:
-#         st.subheader("KPI 2")
-#         st.write("200")
-#     with kpi3:
-#         st.subheader("KPI 3")
-#         st.write("300")
-#     with kpi4:
-#         st.subheader("KPI 4")
-#         st.write("400")
-
-# # Container 2: Two charts side by side
-# with st.container():
-#     # Add title
-#     st.title("Charts 1 and 2")
     
-#     # Add two chart widgets side by side
-#     chart1, chart2 = st.beta_columns(2)
-#     with chart1:
-#         st.subheader("Chart 1")
-#         st.line_chart({"x": [1, 2, 3], "y": [10, 20, 30]})
-#     with chart2:
-#         st.subheader("Chart 2")
-#         st.bar_chart({"x": [1, 2, 3], "y": [10, 20, 30]})
+    # Add KPI widgets with placeholder values
+    kpi1, kpi2, kpi3, kpi4, state_filter = st.beta_columns(5)
+    with kpi1:
+        st.subheader("KPI 1")
+        st.write("100")
+    with kpi2:
+        st.subheader("KPI 2")
+        st.write("200")
+    with kpi3:
+        st.subheader("KPI 3")
+        st.write("300")
+    with kpi4:
+        st.subheader("KPI 4")
+        st.write("400")
+    with state_filter:
+        state_filter = st.selectbox(
+    'Select a state',
+    sorted(df['state'].unique())
+)
 
-# # Container 3: Two charts side by side
-# with st.container():
-#     # Add title
-#     st.title("Charts 3 and 4")
+# Container 2: Two charts side by side
+with st.container():
+    # Add title
+    st.title("Charts 1 and 2")
     
-#     # Add two chart widgets side by side
-#     chart3, chart4 = st.beta_columns(2)
-#     with chart3:
-#         st.subheader("Chart 3")
-#         st.area_chart({"x": [1, 2, 3], "y": [10, 20, 30]})
-#     with chart4:
-#         st.subheader("Chart 4")
-#         st.line_chart({"x": [1, 2, 3], "y": [10, 20, 30]})
+    # Add two chart widgets side by side
+    chart1, chart2 = st.beta_columns(2)
+    with chart1:
+        st.subheader("Chart 1")
+        st.line_chart({"x": [1, 2, 3], "y": [10, 20, 30]})
+    with chart2:
+        st.subheader("Chart 2")
+        st.bar_chart({"x": [1, 2, 3], "y": [10, 20, 30]})
 
-# Define the sidebar options.csv')
+# Container 3: Two charts side by side
+with st.container():
+    # Add title
+    st.title("Charts 3 and 4")
+    
+    # Add two chart widgets side by side
+    chart3, chart4 = st.beta_columns(2)
+    with chart3:
+        st.subheader("Chart 3")
+        st.area_chart({"x": [1, 2, 3], "y": [10, 20, 30]})
+    with chart4:
+        st.subheader("Chart 4")
+        st.line_chart({"x": [1, 2, 3], "y": [10, 20, 30]})
+
 
 # Define the state filter dropdown
 state_filter = st.selectbox(
