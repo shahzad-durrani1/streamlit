@@ -90,7 +90,7 @@ with st.container():
     with state_filter:
         state_filter = st.selectbox(
     'Select a state',
-    sorted(df['state'].unique())
+    sorted(df['state'].unique()))
 
     with kpi1:
         st.subheader("KPI 1")
@@ -105,7 +105,7 @@ with st.container():
         st.subheader("KPI 4")
         st.write("400")
     
-)
+
 
 # Container 2: Two charts side by side
 with st.container():
