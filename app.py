@@ -128,23 +128,24 @@ print(complaints_sum_in_progress)
 #         st.subheader("Chart 4")
 #         st.line_chart({"x": [1, 2, 3], "y": [10, 20, 30]})
 
-# Define the sidebar options
-sidebar_options = st.sidebar.multiselect(
-    'Select State(s)',
+# Define the sidebar options.csv')
+
+# Define the state filter dropdown
+state_filter = st.selectbox(
+    'Select a state',
     sorted(df['state'].unique())
 )
 
-# Filter the DataFrame by state if the user selected any states in the sidebar
-if sidebar_options:
-    df = df.loc[df['state'].isin(sidebar_options)]
+# Filter the DataFrame by state if a state is selected in the dropdown
+if state_filter:
+    df = df.loc[df['state'] == state_filter]
 
 # Display the total number of complaints and number of complaints per state
 st.write('### Summary')
 st.write('Total number of complaints:', len(df))
-st.write('Number of complaints per state:')
-st.write(df['state'].value_counts())
+st.write('Number of complaints in', state_filter, ':', len(df))
 
-# Display a bar chart of the number of complaints per state
-st.write('### Number of complaints per state')
-chart_data = df['state'].value_counts()
+# Display a bar chart of the number of complaints per sub-product in the selected state
+st.write('### Number of complaints per sub-product in', state_filter)
+chart_data = df['sub_product'].value_counts()
 st.bar_chart(chart_data)
