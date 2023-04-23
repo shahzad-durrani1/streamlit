@@ -86,7 +86,13 @@ complaints_timely_state = timely_complaints.to_dict()
 complaints_timely_state['ALL'] = temp 
 
 
+in_progress_complaints = df[df['company_response'] == 'In progress'].groupby('state')['count of complaint_id'].sum()
 
+temp = in_progress_complaints.sum()
+
+complaints_response_state = in_progress_complaints.to_dict()
+
+complaints_response_state['ALL'] = temp 
 
 
 
@@ -209,7 +215,7 @@ with st.container():
     kpi1.metric("Count of Complaints", complaints_sum_state[state_filter])
     kpi2.metric("Complaints with Closed Status", complaints_closed_state[state_filter])
     kpi3.metric("% of Timely Responded Complaints", (complaints_timely_state[state_filter] / complaints_sum_state[state_filter] ) * 100)
-    kpi4.metric("Complaints with Closed Status", "200")
+    kpi4.metric("Complaints with Closed Status", complaints_response_state[state_filter])
 
     
 
