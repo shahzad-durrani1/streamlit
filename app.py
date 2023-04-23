@@ -30,21 +30,9 @@ df = pd.DataFrame(ws.get_all_records())
 
 # st.write(df.head(10))
 
-complaints_total = df['count of complaint_id'].sum()
-
-print(complaints_total)
-
-complaints_by_state = df.groupby('state')['count of complaint_id'].sum()
-
-print(complaints_by_state)
-
 
 # Total Number of Complaints with Closed Status
-closed_rows = df.loc[df['company_response'].str.contains('closed', case=False)]
 
-total = closed_rows['count of complaint_id'].sum()
-
-print(total)
 
 # % of Timely Responded Complaints
 
@@ -64,13 +52,38 @@ complaints_sum_in_progress = response_in_progress['count of complaint_id'].sum()
 
 print(complaints_sum_in_progress)
 
+df_latest = pd.DataFrame()
 
-# Load data from a Google Sheets spreadsheet
+def create_kpi_df(state):
+    global df_latest
 
-# sheet_key = sheet_url.split("/")[-2]
-# worksheet_name = "Sheet1"  # Replace with the name of your worksheet
-# worksheet = client.open_by_key(sheet_key).worksheet(worksheet_name)
-# data = worksheet.get_all_values()
+    df_cols = ['complaints_sum', 'complaints_sum_closed', 'complaints_sum_timely_yes', 'complaints_sum_in_progress']
+
+    df_latest[df_cols] = df_latest[df_cols].replace('',0).astype('int')
+
+    if state == 'ALL':
+        df_latest['complaints_sum'] = df['count of complaint_id'].sum()
+        print(df_latest['complaints_sum'])
+
+        complaints_closed = df.loc[df['company_response'].str.contains('closed', case=False)]
+        df_latest['complaints_sum_closed'] = complaints_closed['count of complaint_id'].sum()
+        print(df_latest['complaints_sum_closed'])
+
+
+    else:
+        complaints_by_state = df.groupby('state')['count of complaint_id'].sum()
+        print(complaints_by_state)
+        df_latest['complaints_sum'] = complaints_by_state[df['state'] == state]
+
+        complaints_closed_state = df.loc[(df['state'] == state) & (df['company_response'].str.contains('closed', case=False))]
+        df_latest['complaints_sum_closed'] = complaints_closed_state['count of complaint_id'].sum()
+        print(df_latest['complaints_sum_closed'])
+
+
+
+
+
+
 
 # Display the data in a Streamlit table
 # st.table(data)
@@ -152,7 +165,9 @@ with st.container():
     'Select a state',
     sorted(state_mapping.keys()))
 
-    kpi1.metric("Count of Complaints", complaints_by_state[state_filter])
+    
+    create_kpi_df(state_filter)
+    kpi1.metric("Count of Complaints", df_latest['complaints_sum'])
     kpi2.metric("Complaints with Closed Status", "200")
     kpi3.metric("Complaints with Closed Status", "200")
     kpi4.metric("Complaints with Closed Status", "200")
