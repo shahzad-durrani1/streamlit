@@ -232,7 +232,7 @@ chart = alt.Chart(complaints_by_product).mark_bar().encode(
 ).properties(
     title='Number of Complaints by Product',
     width=350,
-    height=350
+    height=400
 )
 
 # Display the chart in Streamlit
@@ -245,7 +245,7 @@ with st.container():
     st.title("Charts 1 and 2")
     
     # Add two chart widgets side by side
-    chart1, chart2 = st.columns(2)
+    chart1, chart2 = st.columns([4,3])
     with chart1:
         st.altair_chart(chart)
     with chart2:
