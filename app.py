@@ -61,7 +61,7 @@ def create_kpi_df(state):
     global df_latest
    
     if state == 'ALL':
-        # print('here')
+        print('here')
         df_latest['complaints_sum'] = df['count of complaint_id'].sum()
         print(df_latest['complaints_sum'])
 
@@ -164,7 +164,7 @@ with st.container():
     'Select a state',
     sorted(state_mapping.keys()))
 
-    # create_kpi_df(state_filter)
+    create_kpi_df(state_filter)
     kpi1.metric("Count of Complaints", "200")
     kpi2.metric("Complaints with Closed Status", "200")
     kpi3.metric("Complaints with Closed Status", "200")
