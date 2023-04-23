@@ -69,9 +69,11 @@ complaints_closed = df[df['company_response'].str.contains('closed', case=False)
 
 complaints_closed_state = complaints_closed.groupby('state')['count of complaint_id'].sum()
 
+temp = complaints_closed_state.sum()
+
 complaints_closed_state = complaints_closed_state.to_dict()
 
-complaints_closed_state['ALL'] = complaints_closed_state.sum()
+complaints_closed_state['ALL'] = temp
 
 
 # def create_kpi_df(state):
