@@ -36,12 +36,12 @@ df = pd.DataFrame(ws.get_all_records())
 
 # % of Timely Responded Complaints
 
-timely_yes = df.loc[df['timely'] == 'Yes']
-complaints_sum_timely_yes = timely_yes['count of complaint_id'].sum()
+# timely_yes = df.loc[df['timely'] == 'Yes']
+# complaints_sum_timely_yes = timely_yes['count of complaint_id'].sum()
 
-print(complaints_sum_timely_yes)
+# print(complaints_sum_timely_yes)
 
-print((complaints_sum_timely_yes / complaints_total) * 100)
+# print((complaints_sum_timely_yes / complaints_total) * 100)
 
 
 # Total Number of Complaints with In Progress Status
