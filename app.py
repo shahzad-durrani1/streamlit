@@ -52,8 +52,8 @@ df = pd.DataFrame(ws.get_all_records())
 
 # print(complaints_sum_in_progress)
 
-df_cols = ['complaints_sum', 'complaints_sum_closed', 'complaints_sum_timely_yes', 'complaints_sum_in_progress']
-df_latest = pd.DataFrame(columns=df_cols)
+# df_cols = ['complaints_sum', 'complaints_sum_closed', 'complaints_sum_timely_yes', 'complaints_sum_in_progress']
+# df_latest = pd.DataFrame(columns=df_cols)
 
 
 complaints_sum_state = df.groupby('state')['count of complaint_id'].sum()
@@ -193,7 +193,7 @@ with st.container():
     
     
     kpi1.metric("Count of Complaints", complaints_sum_state[state_filter])
-    kpi2.metric("Complaints with Closed Status", '200')
+    kpi2.metric("Complaints with Closed Status", complaints_sum_state[state_filter])
     kpi3.metric("Complaints with Closed Status", "200")
     kpi4.metric("Complaints with Closed Status", "200")
 
