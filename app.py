@@ -61,11 +61,14 @@ def create_kpi_df(state):
    
     if state == 'ALL':
         print('here')
-        df_latest['complaints_sum'] = df['count of complaint_id'].sum()
+        temp = df['count of complaint_id'].sum()
+        df_latest['complaints_sum'] = temp
         print(df_latest['complaints_sum'])
 
         complaints_closed = df.loc[df['company_response'].str.contains('closed', case=False)]
-        df_latest['complaints_sum_closed'] = complaints_closed['count of complaint_id'].sum()
+        temp= complaints_closed['count of complaint_id'].sum()
+        df_latest['complaints_sum_closed'] = temp
+        
         print(df_latest['complaints_sum_closed'])
 
 
