@@ -46,11 +46,11 @@ df = pd.DataFrame(ws.get_all_records())
 
 # Total Number of Complaints with In Progress Status
 
-response_in_progress = df.loc[df['company_response'] == 'In progress']
+# response_in_progress = df.loc[df['company_response'] == 'In progress']
 
-complaints_sum_in_progress = response_in_progress['count of complaint_id'].sum()
+# complaints_sum_in_progress = response_in_progress['count of complaint_id'].sum()
 
-print(complaints_sum_in_progress)
+# print(complaints_sum_in_progress)
 
 df_latest = pd.DataFrame()
 
