@@ -166,7 +166,7 @@ with st.container():
     sorted(state_mapping.keys()))
 
     
-    create_kpi_df(state_filter)
+    # create_kpi_df(state_filter)
     kpi1.metric("Count of Complaints", "200")
     kpi2.metric("Complaints with Closed Status", "200")
     kpi3.metric("Complaints with Closed Status", "200")
