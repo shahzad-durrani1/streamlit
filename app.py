@@ -58,7 +58,6 @@ df_latest = pd.DataFrame(columns=df_cols)
 
 def create_kpi_df(state):
     print(state)
-    global df_latest
    
     if state == 'ALL':
         print('here')
