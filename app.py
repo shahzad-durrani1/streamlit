@@ -2,7 +2,7 @@ import streamlit as st
 import gspread as gs
 import pandas as pd
 from google.oauth2 import service_account
-import requests
+import altair as alt
 
 
 
@@ -200,7 +200,7 @@ with st.container():
     
     
     # Add KPI widgets with placeholder values
-    kpi1, kpi2, kpi3, kpi4, state_filter = st.columns([5,5,5,5,4])
+    kpi1, kpi2, kpi3, kpi4, state_filter = st.columns([7,7,7,7,5])
     state_filter = st.selectbox(
     'Select a state',
     sorted(state_mapping.keys()))
@@ -217,7 +217,26 @@ with st.container():
     kpi3.metric("% of Timely Responded Complaints", (complaints_timely_state[state_filter] / complaints_sum_state[state_filter] ) * 100)
     kpi4.metric("Complaints with Closed Status", complaints_response_state[state_filter])
 
-    
+
+
+complaints_by_product = df.groupby('product').size().reset_index(name='count')
+
+# Sort the data in descending order of complaint count
+complaints_by_product = complaints_by_product.sort_values('count', ascending=False)
+
+# Use Altair to create a horizontal bar chart
+chart = alt.Chart(complaints_by_product).mark_bar().encode(
+    x='count',
+    y=alt.Y('product', sort='-x'),
+    color=alt.Color('product', legend=None)
+).properties(
+    title='Number of Complaints by Product',
+    width=800,
+    height=500
+)
+
+# Display the chart in Streamlit
+st.altair_chart(chart)
 
 
 # Container 2: Two charts side by side
