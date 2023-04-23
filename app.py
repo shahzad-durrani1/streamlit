@@ -52,20 +52,26 @@ df = pd.DataFrame(ws.get_all_records())
 
 # print(complaints_sum_in_progress)
 
-# df_cols = ['complaints_sum', 'complaints_sum_closed', 'complaints_sum_timely_yes', 'complaints_sum_in_progress']
-# df_latest = pd.DataFrame(columns=df_cols)
+df_cols = ['complaints_sum', 'complaints_sum_closed', 'complaints_sum_timely_yes', 'complaints_sum_in_progress']
+df_latest = pd.DataFrame(columns=df_cols)
+
+
+complaints_sum_state = df.groupby('state')['count of complaint_id'].sum()
+
+complaints_sum_state = complaints_sum_state.to_dict()
+
+complaints_sum_state['ALL'] = df['count of complaint_id'].sum()
 
 
 
-def complaints_sum(state):
-    if state == 'ALL':
-        temp = df['count of complaint_id'].sum()
-        print(temp)
-        return temp
-    else:
-        complaints_by_state = df.groupby('state')['count of complaint_id'].sum()
-        return complaints_by_state[df['state'] == state]
-        
+
+complaints_closed = df[df['company_response'].str.contains('closed', case=False)]
+
+complaints_closed_state = complaints_closed.groupby('state')['count of complaint_id'].sum()
+
+complaints_closed_state = complaints_closed_state.to_dict()
+
+complaints_closed_state['ALL'] = complaints_closed_state.sum()
 
 
 # def create_kpi_df(state):
@@ -184,7 +190,7 @@ with st.container():
     #     print("Error: Unalignable boolean series provided as indexer.")
     
     
-    kpi1.metric("Count of Complaints", state_filter)
+    kpi1.metric("Count of Complaints", complaints_sum_state[state_filter])
     kpi2.metric("Complaints with Closed Status", '200')
     kpi3.metric("Complaints with Closed Status", "200")
     kpi4.metric("Complaints with Closed Status", "200")
