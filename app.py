@@ -193,7 +193,7 @@ with st.container():
     
     
     kpi1.metric("Count of Complaints", complaints_sum_state[state_filter])
-    kpi2.metric("Complaints with Closed Status", complaints_sum_state[state_filter])
+    kpi2.metric("Complaints with Closed Status", complaints_closed_state[state_filter])
     kpi3.metric("Complaints with Closed Status", "200")
     kpi4.metric("Complaints with Closed Status", "200")
 
