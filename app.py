@@ -56,11 +56,11 @@ df_latest = pd.DataFrame()
 
 def create_kpi_df(state):
     global df_latest
-
+    print('here1')
     df_cols = ['complaints_sum', 'complaints_sum_closed', 'complaints_sum_timely_yes', 'complaints_sum_in_progress']
-
+     print('here2')
     for newcol in df_cols:
-        print('here1')
+        # print('here3')
         df_latest[newcol]= None
 
     if state == 'ALL':
