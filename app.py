@@ -182,8 +182,9 @@ with st.container():
     # except pd.errors.IndexingError:
     #     # Catch the exception and handle it
     #     print("Error: Unalignable boolean series provided as indexer.")
-  
-    kpi1.metric("Count of Complaints", complaints_sum(state=state_filter))
+    
+    complaints_df = complaints_sum(state=state_filter).reset_index()
+    kpi1.metric("Count of Complaints", complaints_df)
     kpi2.metric("Complaints with Closed Status", '200')
     kpi3.metric("Complaints with Closed Status", "200")
     kpi4.metric("Complaints with Closed Status", "200")
