@@ -55,10 +55,12 @@ df = pd.DataFrame(ws.get_all_records())
 df_latest = None
 
 def create_kpi_df(state):
-    global df_latest
-    df_cols = ['complaints_sum', 'complaints_sum_closed', 'complaints_sum_timely_yes', 'complaints_sum_in_progress']
 
-    df_latest = pd.DataFrame(columns=df_cols)
+    print(state)
+    # global df_latest
+    # df_cols = ['complaints_sum', 'complaints_sum_closed', 'complaints_sum_timely_yes', 'complaints_sum_in_progress']
+
+    # df_latest = pd.DataFrame(columns=df_cols)
 
     if state == 'ALL':
         # print('here')
