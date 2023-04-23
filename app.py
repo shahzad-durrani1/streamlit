@@ -231,8 +231,8 @@ chart = alt.Chart(complaints_by_product).mark_bar().encode(
     color=alt.Color('product', legend=None)
 ).properties(
     title='Number of Complaints by Product',
-    width=400,
-    height=400
+    width=300,
+    height=300
 )
 
 # Display the chart in Streamlit
