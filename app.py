@@ -52,34 +52,44 @@ df = pd.DataFrame(ws.get_all_records())
 
 # print(complaints_sum_in_progress)
 
-df_cols = ['complaints_sum', 'complaints_sum_closed', 'complaints_sum_timely_yes', 'complaints_sum_in_progress']
-df_latest = pd.DataFrame(columns=df_cols)
+# df_cols = ['complaints_sum', 'complaints_sum_closed', 'complaints_sum_timely_yes', 'complaints_sum_in_progress']
+# df_latest = pd.DataFrame(columns=df_cols)
 
 
-def create_kpi_df(state):
-    print(state)
-   
+
+def complaints_sum(state):
     if state == 'ALL':
-        print('here')
         temp = df['count of complaint_id'].sum()
-        df_latest['complaints_sum'] = temp
-        print(df_latest['complaints_sum'])
-
-        # complaints_closed = df.loc[df['company_response'].str.contains('closed', case=False)]
-        # temp= complaints_closed['count of complaint_id'].sum()
-        # df_latest['complaints_sum_closed'] = temp
-        
-        # print(df_latest['complaints_sum_closed'])
-
-
+        print(temp)
+        return temp
     else:
         complaints_by_state = df.groupby('state')['count of complaint_id'].sum()
-        print(complaints_by_state)
-        df_latest['complaints_sum'] = complaints_by_state[df['state'] == state]
+        return complaints_by_state[df['state'] == state]
+        
 
-        # complaints_closed_state = df.loc[(df['state'] == state) & (df['company_response'].str.contains('closed', case=False))]
-        # df_latest['complaints_sum_closed'] = complaints_closed_state['count of complaint_id'].sum()
-        # print(df_latest['complaints_sum_closed'])
+
+# def create_kpi_df(state):
+#     print(state)
+   
+#     if state == 'ALL':
+#         print('here')
+        
+#         df_latest['complaints_sum'] = temp
+#         print(df_latest['complaints_sum'])
+
+#         # complaints_closed = df.loc[df['company_response'].str.contains('closed', case=False)]
+#         # temp= complaints_closed['count of complaint_id'].sum()
+#         # df_latest['complaints_sum_closed'] = temp
+        
+#         # print(df_latest['complaints_sum_closed'])
+
+
+#     else:
+        
+
+#         # complaints_closed_state = df.loc[(df['state'] == state) & (df['company_response'].str.contains('closed', case=False))]
+#         # df_latest['complaints_sum_closed'] = complaints_closed_state['count of complaint_id'].sum()
+#         # print(df_latest['complaints_sum_closed'])
 
 
 
@@ -155,6 +165,7 @@ state_mapping = {
 
 
 # Container 1: KPIs with State Filter
+
 with st.container():
     # Add title and filter widgets
     st.title("KPIs")
@@ -172,7 +183,7 @@ with st.container():
         # Catch the exception and handle it
         print("Error: Unalignable boolean series provided as indexer.")
   
-    kpi1.metric("Count of Complaints", df_latest['complaints_sum'])
+    kpi1.metric("Count of Complaints", complaints_sum(state=state_filter))
     kpi2.metric("Complaints with Closed Status", '200')
     kpi3.metric("Complaints with Closed Status", "200")
     kpi4.metric("Complaints with Closed Status", "200")
