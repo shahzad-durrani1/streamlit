@@ -52,16 +52,14 @@ df = pd.DataFrame(ws.get_all_records())
 
 # print(complaints_sum_in_progress)
 
-df_latest = None
+df_cols = ['complaints_sum', 'complaints_sum_closed', 'complaints_sum_timely_yes', 'complaints_sum_in_progress']
+df_latest = pd.DataFrame(columns=df_cols)
+
 
 def create_kpi_df(state):
-
     print(state)
     global df_latest
-    df_cols = ['complaints_sum', 'complaints_sum_closed', 'complaints_sum_timely_yes', 'complaints_sum_in_progress']
-
-    df_latest = pd.DataFrame(columns=df_cols)
-
+   
     if state == 'ALL':
         # print('here')
         df_latest['complaints_sum'] = df['count of complaint_id'].sum()
@@ -166,7 +164,7 @@ with st.container():
     'Select a state',
     sorted(state_mapping.keys()))
 
-    create_kpi_df(state_filter)
+    # create_kpi_df(state_filter)
     kpi1.metric("Count of Complaints", "200")
     kpi2.metric("Complaints with Closed Status", "200")
     kpi3.metric("Complaints with Closed Status", "200")
