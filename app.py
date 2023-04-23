@@ -170,7 +170,7 @@ with st.container():
 
     
     create_kpi_df(state_filter)
-    kpi1.metric("Count of Complaints", df_latest['complaints_sum'])
+    kpi1.metric("Count of Complaints", "200")
     kpi2.metric("Complaints with Closed Status", "200")
     kpi3.metric("Complaints with Closed Status", "200")
     kpi4.metric("Complaints with Closed Status", "200")
