@@ -162,8 +162,13 @@ with st.container():
     state_filter = st.selectbox(
     'Select a state',
     sorted(state_mapping.keys()))
-
-    create_kpi_df(state_filter)
+    try:
+        # Try to index the dataframe with the boolean series
+          create_kpi_df(state_filter)
+    except pd.errors.IndexingError:
+        # Catch the exception and handle it
+        print("Error: Unalignable boolean series provided as indexer.")
+  
     kpi1.metric("Count of Complaints", "200")
     kpi2.metric("Complaints with Closed Status", "200")
     kpi3.metric("Complaints with Closed Status", "200")
