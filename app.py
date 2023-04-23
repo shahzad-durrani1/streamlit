@@ -162,12 +162,11 @@ with st.container():
     
     # Add KPI widgets with placeholder values
     kpi1, kpi2, kpi3, kpi4, state_filter = st.columns([5,5,5,5,4])
-    with state_filter:
-        _state = st.selectbox(
+    state_filter = st.selectbox(
     'Select a state',
     sorted(state_mapping.keys()))
 
-    create_kpi_df(_state)
+    create_kpi_df(state_filter)
     kpi1.metric("Count of Complaints", "200")
     kpi2.metric("Complaints with Closed Status", "200")
     kpi3.metric("Complaints with Closed Status", "200")
