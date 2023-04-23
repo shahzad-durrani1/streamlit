@@ -59,7 +59,8 @@ def create_kpi_df(state):
 
     df_cols = ['complaints_sum', 'complaints_sum_closed', 'complaints_sum_timely_yes', 'complaints_sum_in_progress']
 
-    df_latest.loc[:,df_cols] = None
+    for newcol in df_cols:
+        df_latest[newcol]= None
 
     if state == 'ALL':
         print('here')
