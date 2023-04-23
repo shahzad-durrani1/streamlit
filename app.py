@@ -255,7 +255,7 @@ with st.container():
         # st.bar_chart(product_counts)
     with chart2:
         st.subheader("Chart 2")
-        st.line_chart(complaints_by_month.set_index('Date received'))
+        st.line_chart(complaints_by_month.set_index('month_year'))
 
 # Container 3: Two charts side by side
 with st.container():
