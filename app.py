@@ -169,8 +169,8 @@ with st.container():
         # Catch the exception and handle it
         print("Error: Unalignable boolean series provided as indexer.")
   
-    kpi1.metric("Count of Complaints", "200")
-    kpi2.metric("Complaints with Closed Status", "200")
+    kpi1.metric("Count of Complaints", df_latest['complaints_sum'])
+    kpi2.metric("Complaints with Closed Status", df_latest['complaints_sum_closed'])
     kpi3.metric("Complaints with Closed Status", "200")
     kpi4.metric("Complaints with Closed Status", "200")
 
