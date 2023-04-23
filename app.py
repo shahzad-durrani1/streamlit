@@ -62,6 +62,7 @@ def create_kpi_df(state):
     df_latest.loc[:,df_cols] = None
 
     if state == 'ALL':
+        print('here')
         df_latest['complaints_sum'] = df['count of complaint_id'].sum()
         print(df_latest['complaints_sum'])
 
