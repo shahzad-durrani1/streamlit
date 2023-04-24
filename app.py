@@ -297,7 +297,7 @@ def create_line_chart(state):
     
 
 
-submitted_via_count = df["Submitted via"].value_counts()
+submitted_via_count = df["submitted_via"].value_counts()
 
 # Create pie chart
 fig = px.pie(submitted_via_count, values=submitted_via_count.values, names=submitted_via_count.index)
