@@ -297,15 +297,17 @@ def create_line_chart(state):
     
 
 
-submitted_via_count = df.groupby('submitted_via')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
-
-# Create pie chart
-fig = px.pie(submitted_via_count, values=submitted_via_count['Number of Complaints'], names=submitted_via_count['submitted_via'], width = 400 , height=400)
-
-
-
-
-# Display pie chart in Streamlit
+def create_pie_chart(state):
+    
+    if state == 'ALL':
+        submitted_via_count = df.groupby('submitted_via')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
+        # Create pie chart
+        fig = px.pie(submitted_via_count, values=submitted_via_count['Number of Complaints'], names=submitted_via_count['submitted_via'], width = 400 , height=400, title='Number of Complaints by Submitted Via Channel')
+    else:
+        submitted_via_count = df[df['state'] == state].groupby('submitted_via')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
+        fig = px.pie(submitted_via_count, values=submitted_via_count['Number of Complaints'], names=submitted_via_count['submitted_via'], width = 400 , height=400, title='Number of Complaints by Submitted Via Channel')
+    
+    return fig
 
 
 # Container 2: Two charts side by side
@@ -331,7 +333,8 @@ with st.container():
     # Add two chart widgets side by side
     chart3, chart4 = st.columns([4,3])
     with chart3:
-        st.subheader("Chart 3")
+        # st.subheader("Chart 3")
+        fig = create_pie_chart(state_filter)
         st.plotly_chart(fig)
     with chart4:
         st.subheader("Chart 4")
