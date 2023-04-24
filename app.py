@@ -264,8 +264,13 @@ def create_line_chart(state):
         complaints_by_month = df.groupby('month_year')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
     else:
         complaints_by_month = df[df['state'] == state].groupby('month_year')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
+
+    chart = alt.Chart(complaints_by_month).mark_line().encode(
+    x='month_year',
+    y='Number of Complaints'
+)
         
-    return complaints_by_month
+    return chart
     
 
 complaints_by_month = create_line_chart(state_filter)
@@ -280,8 +285,8 @@ with st.container():
         st.altair_chart(chart)
         # st.bar_chart(product_counts)
     with chart2:
-        st.subheader("Number of Complaints by Month_Year")
-        st.line_chart(complaints_by_month.set_index('month_year'))
+        # st.subheader("Number of Complaints by Month_Year")
+        st.line_chart(complaints_by_month)
 
         
 
