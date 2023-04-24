@@ -3,6 +3,7 @@ import gspread as gs
 import pandas as pd
 from google.oauth2 import service_account
 import altair as alt
+import plotly.express as px
 
 
 
@@ -100,7 +101,7 @@ complaints_response_state = in_progress_complaints.to_dict()
 complaints_response_state['ALL'] = temp 
 
 
-
+complaints_by_month = df[df['state'] == 'AL'].groupby('month_year')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
 
 
 # def create_kpi_df(state):
@@ -296,7 +297,13 @@ def create_line_chart(state):
     
 
 
+submitted_via_count = complaints["Submitted via"].value_counts()
 
+# Create pie chart
+fig = px.pie(submitted_via_count, values=submitted_via_count.values, names=submitted_via_count.index)
+
+# Display pie chart in Streamlit
+st.plotly_chart(fig)
 
 # Container 2: Two charts side by side
 with st.container():
