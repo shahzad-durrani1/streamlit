@@ -263,7 +263,7 @@ def create_line_chart(state):
     if state == 'ALL':
         complaints_by_product = df.groupby('product')['count of complaint_id'].sum().reset_index(name='count')
     else:
-        complaints_by_product = df[df['state'] == 'AK'].groupby('product')['count of complaint_id'].sum().reset_index(name='count')
+        complaints_by_product = df[df['state'] == state].groupby('product')['count of complaint_id'].sum().reset_index(name='count')
         
     
 
