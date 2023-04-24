@@ -311,10 +311,10 @@ def create_pie_chart(state):
 
 
 
-df_count = df.groupby(['Issue', 'Sub-issue'])['count of complaint_id'].sum().reset_index(name='Number of Complaints')
+df_count = df.groupby(['issue', 'sub_issue'])['count of complaint_id'].sum().reset_index(name='Number of Complaints')
 
 # Create Treemap
-fig = px.treemap(df_count, path=['Issue', 'Sub-issue'], values='Number of Complaints')
+fig = px.treemap(df_count, path=['issue', 'sub_issue'], values='Number of Complaints')
 
 # Show Treemap
 
