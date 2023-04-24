@@ -230,7 +230,11 @@ with st.container():
 
 def create_prod_chart(state):
 
-    complaints_by_product = df[df['state'] == 'AK'].groupby('product')['count of complaint_id'].sum().reset_index(name='count')
+
+    if state == 'ALL':
+        complaints_by_product = df.groupby('product')['count of complaint_id'].sum().reset_index(name='count')
+    else:
+        complaints_by_product = df[df['state'] == 'AK'].groupby('product')['count of complaint_id'].sum().reset_index(name='count')
 
     # Sort the data in descending order of complaint count
     complaints_by_product = complaints_by_product.sort_values('count', ascending=False)
@@ -252,8 +256,18 @@ def create_prod_chart(state):
 
 # product_counts = df.groupby('product')['count of complaint_id'].count().sort_values(ascending=False)
 
-complaints_by_month = df.groupby('month_year').size().reset_index(name='Number of Complaints')
 
+
+def create_line_chart(state):
+    
+    if state == 'ALL':
+        complaints_by_product = df.groupby('product')['count of complaint_id'].sum().reset_index(name='count')
+    else:
+        complaints_by_product = df[df['state'] == 'AK'].groupby('product')['count of complaint_id'].sum().reset_index(name='count')
+        
+    
+
+complaints_by_month = df.groupby('month_year')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
 
 
 # Container 2: Two charts side by side
