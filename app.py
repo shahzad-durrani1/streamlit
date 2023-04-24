@@ -297,13 +297,13 @@ def create_line_chart(state):
     
 
 
-submitted_via_count = complaints["Submitted via"].value_counts()
+submitted_via_count = df["Submitted via"].value_counts()
 
 # Create pie chart
 fig = px.pie(submitted_via_count, values=submitted_via_count.values, names=submitted_via_count.index)
 
 # Display pie chart in Streamlit
-st.plotly_chart(fig)
+
 
 # Container 2: Two charts side by side
 with st.container():
@@ -329,7 +329,7 @@ with st.container():
     chart3, chart4 = st.columns(2)
     with chart3:
         st.subheader("Chart 3")
-        st.area_chart({"x": [1, 2, 3], "y": [10, 20, 30]})
+        st.plotly_chart(fig)
     with chart4:
         st.subheader("Chart 4")
         st.line_chart({"x": [1, 2, 3], "y": [10, 20, 30]})
