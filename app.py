@@ -56,6 +56,11 @@ df = pd.DataFrame(ws.get_all_records())
 # df_latest = pd.DataFrame(columns=df_cols)
 
 
+temp = df[df['state'] == 'AK'].groupby('product')['count of complaint_id'].sum()
+
+temp  = temp.to_dict()
+
+
 complaints_sum_state = df.groupby('state')['count of complaint_id'].sum()
 
 complaints_sum_state = complaints_sum_state.to_dict()
@@ -93,6 +98,8 @@ temp = in_progress_complaints.sum()
 complaints_response_state = in_progress_complaints.to_dict()
 
 complaints_response_state['ALL'] = temp 
+
+
 
 
 
@@ -219,21 +226,27 @@ with st.container():
 
 
 
-complaints_by_product = df.groupby('product').size().reset_index(name='count')
 
-# Sort the data in descending order of complaint count
-complaints_by_product = complaints_by_product.sort_values('count', ascending=False)
 
-# Use Altair to create a horizontal bar chart
-chart = alt.Chart(complaints_by_product).mark_bar().encode(
+def create_prod_chart(state):
+
+    complaints_by_product = df[df['state'] == 'AK'].groupby('product')['count of complaint_id'].sum().reset_index(name='count')
+
+    # Sort the data in descending order of complaint count
+    complaints_by_product = complaints_by_product.sort_values('count', ascending=False)
+
+    # Use Altair to create a horizontal bar chart
+    chart = alt.Chart(complaints_by_product).mark_bar().encode(
     x='count',
     y=alt.Y('product', sort='-x'),
     color=alt.Color('product', legend=None)
-).properties(
+    ).properties(
     title='Number of Complaints by Product',
     width=350,
     height=400
-)
+    )
+
+    return chart
 
 # Display the chart in Streamlit
 
@@ -248,6 +261,7 @@ with st.container():
     # Add title
     st.title("Charts 1 and 2")
     
+    chart = create_prod_chart(state_filter)
     # Add two chart widgets side by side
     chart1, chart2 = st.columns([4,3])
     with chart1:
