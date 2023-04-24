@@ -273,7 +273,7 @@ def create_line_chart(state):
     return chart
     
 
-complaints_by_month = create_line_chart(state_filter)
+
 
 
 # Container 2: Two charts side by side
@@ -285,8 +285,9 @@ with st.container():
         st.altair_chart(chart)
         # st.bar_chart(product_counts)
     with chart2:
+        complaints_by_month = create_line_chart(state_filter)
         # st.subheader("Number of Complaints by Month_Year")
-        st.line_chart(complaints_by_month)
+        st.altair_chart(complaints_by_month)
 
         
 
