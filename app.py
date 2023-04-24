@@ -310,6 +310,16 @@ def create_pie_chart(state):
     return fig
 
 
+
+df_count = df.groupby(['Issue', 'Sub-issue'])['count of complaint_id'].sum().reset_index(name='Number of Complaints')
+
+# Create Treemap
+fig = px.treemap(df_count, path=['Issue', 'Sub-issue'], values='Number of Complaints')
+
+# Show Treemap
+
+
+
 # Container 2: Two charts side by side
 with st.container():
     chart = create_prod_chart(state_filter)
@@ -338,7 +348,7 @@ with st.container():
         st.plotly_chart(fig)
     with chart4:
         st.subheader("Chart 4")
-        st.line_chart({"x": [1, 2, 3], "y": [10, 20, 30]})
+        fig.show()
 
 
 # # Define the state filter dropdown
