@@ -261,13 +261,14 @@ def create_prod_chart(state):
 def create_line_chart(state):
     
     if state == 'ALL':
-        complaints_by_product = df.groupby('product')['count of complaint_id'].sum().reset_index(name='count')
+        complaints_by_month = df.groupby('month_year')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
     else:
-        complaints_by_product = df[df['state'] == state].groupby('product')['count of complaint_id'].sum().reset_index(name='count')
+        complaints_by_month = df[df['state'] == state].groupby('month_year')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
         
+    return complaints_by_month
     
 
-complaints_by_month = df.groupby('month_year')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
+complaints_by_month = create_line_chart(state_filter)
 
 
 # Container 2: Two charts side by side
