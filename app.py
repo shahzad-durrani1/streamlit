@@ -219,11 +219,29 @@ with st.container():
     #     print("Error: Unalignable boolean series provided as indexer.")
     
     
-    kpi1.metric("Count of Complaints", complaints_sum_state[state_filter])
-    kpi2.metric("Complaints with Closed Status", complaints_closed_state[state_filter])
-    kpi3.metric("% of Timely Responded Complaints", (complaints_timely_state[state_filter] / complaints_sum_state[state_filter] ) * 100)
-    kpi4.metric("Complaints with Closed Status", complaints_response_state[state_filter])
+    try:
+        kpi1.metric("Count of Complaints", complaints_sum_state[state_filter])
+    except KeyError:
+        kpi1.metric("Count of Complaints", 'NA')
 
+    try:
+        kpi2.metric("Complaints with Closed Status", complaints_closed_state[state_filter])
+    except KeyError:
+        kpi2.metric("Complaints with Closed Status", 'NA')
+    
+    try:
+        kpi3.metric("% of Timely Responded Complaints", (complaints_timely_state[state_filter] / complaints_sum_state[state_filter] ) * 100)
+    except KeyError:
+        kpi3.metric("% of Timely Responded Complaints", 'NA')
+    
+    try:
+        kpi4.metric("Complaints with Closed Status", complaints_response_state[state_filter])
+    except KeyError:
+        kpi4.metric("Complaints with Closed Status", 'NA')
+
+    
+    
+    
 
 
 
