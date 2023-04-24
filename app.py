@@ -268,7 +268,11 @@ def create_line_chart(state):
     chart = alt.Chart(complaints_by_month).mark_line().encode(
     x='month_year',
     y='Number of Complaints'
-)
+).properties(
+    title='Number of Complaints by Month_Year',
+    width=350,
+    height=400
+    )
         
     return chart
     
