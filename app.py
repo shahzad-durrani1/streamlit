@@ -219,10 +219,10 @@ with st.container():
 
 
 
-complaints_by_product = df.groupby('product').size().reset_index(name='count of complaint_id')
+complaints_by_product = df.groupby('product').size().reset_index(name='count')
 
 # Sort the data in descending order of complaint count
-complaints_by_product = complaints_by_product.sort_values('count of complaint_id', ascending=False)
+complaints_by_product = complaints_by_product.sort_values('count', ascending=False)
 
 # Use Altair to create a horizontal bar chart
 chart = alt.Chart(complaints_by_product).mark_bar().encode(
@@ -239,7 +239,7 @@ chart = alt.Chart(complaints_by_product).mark_bar().encode(
 
 # product_counts = df.groupby('product')['count of complaint_id'].count().sort_values(ascending=False)
 
-complaints_by_month = df.groupby('month_year').size().reset_index(name='count of complaint_id')
+complaints_by_month = df.groupby('month_year').size().reset_index(name='Number of Complaints')
 
 
 
@@ -256,6 +256,8 @@ with st.container():
     with chart2:
         st.subheader("Chart 2")
         st.line_chart(complaints_by_month.set_index('month_year'))
+
+        
 
 # Container 3: Two charts side by side
 with st.container():
