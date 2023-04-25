@@ -198,12 +198,12 @@ state_mapping = {
     'WY': 'Wyoming'
 }
 
-
+st.set_page_config(layout="wide")
 
 # Container 1: KPIs with State Filter
 
 with st.container():
-    st.set_page_config(layout="wide")
+    
     # Add title and filter widgets
     st.title("KPIs")
     
