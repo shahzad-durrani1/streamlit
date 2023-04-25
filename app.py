@@ -209,23 +209,23 @@ with st.container():
  
 
 
-    kpi1, kpi2, kpi3, kpi4, state_filter = st.columns([3,3,3,3,3])
+    kpi1, kpi2, kpi3, kpi4, state = st.columns([3,3,3,3,3])
 
-    
-    state_filter = st.selectbox(
-    'Select a state',
-    sorted(state_mapping.keys()))
-    # try:
-        #     # Try to index the dataframe with the boolean series
-        #       create_kpi_df(state_filter)
-        # except pd.errors.IndexingError:
-        #     # Catch the exception and handle it
-        #     print("Error: Unalignable boolean series provided as indexer.")
-    
-    if state_filter == 'ALL':
-        st.subheader(f"Displaying Data for All States.")
-    else:
-        st.subheader(f"Displaying Data for {state_mapping[state_filter]}.")
+    with state:
+        state_filter = st.selectbox(
+        'Select a state',
+        sorted(state_mapping.keys()))
+        # try:
+            #     # Try to index the dataframe with the boolean series
+            #       create_kpi_df(state_filter)
+            # except pd.errors.IndexingError:
+            #     # Catch the exception and handle it
+            #     print("Error: Unalignable boolean series provided as indexer.")
+        
+        if state_filter == 'ALL':
+            st.subheader(f"Displaying Data for All States.")
+        else:
+            st.subheader(f"Displaying Data for {state_mapping[state_filter]}.")
     
     
     
