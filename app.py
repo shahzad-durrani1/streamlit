@@ -221,13 +221,13 @@ with st.container():
             # except pd.errors.IndexingError:
             #     # Catch the exception and handle it
             #     print("Error: Unalignable boolean series provided as indexer.")
-        
-        if state_filter == 'ALL':
-            st.subheader(f"Displaying Data for All States.")
-        else:
-            st.subheader(f"Displaying Data for {state_mapping[state_filter]}.")
+       
     
-    
+     
+    if state_filter == 'ALL':
+        st.subheader(f"Displaying Data for All States.")
+    else:
+        st.subheader(f"Displaying Data for {state_mapping[state_filter]}")
     
         
     try:
