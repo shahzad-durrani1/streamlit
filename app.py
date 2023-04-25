@@ -209,7 +209,7 @@ with st.container():
     
     
     # Add KPI widgets with placeholder values
-    kpi1, kpi2, kpi3, kpi4, state = st.columns([3,3,4,3,3])
+    kpi1, kpi2, kpi3, kpi4, state = st.columns([3,3,3,3,3])
     with state:
         state_filter = st.selectbox(
         'Select a state',
@@ -333,7 +333,7 @@ def create_tree_map(state):
 with st.container():
     chart = create_prod_chart(state_filter)
     # Add two chart widgets side by side
-    chart1, chart2 = st.columns([4,3])
+    chart1, chart2 = st.columns([2,2])
     with chart1:
         st.altair_chart(chart)
         # st.bar_chart(product_counts)
@@ -346,11 +346,9 @@ with st.container():
 
 # Container 3: Two charts side by side
 with st.container():
-    # Add title
-    st.title("Charts 3 and 4")
     
     # Add two chart widgets side by side
-    chart3, chart4 = st.columns([3,4])
+    chart3, chart4 = st.columns([2,2])
     with chart3:
         # st.subheader("Chart 3")
         fig = create_pie_chart(state_filter)
