@@ -233,9 +233,9 @@ with st.container():
         kpi2.metric("Complaints with Closed Status", 'NA')
     
     try:
-        kpi3.metric("% of Timely Responded Complaints", (complaints_timely_state[state_filter] / complaints_sum_state[state_filter] ) * 100, style={"white-space": "pre-wrap", "text-align": "center"})
+        kpi3.metric("Timely Responded Complaints",  round((complaints_timely_state[state_filter] / complaints_sum_state[state_filter] ) * 100 , 2))
     except KeyError:
-        kpi3.metric("% of Timely Responded Complaints", 'NA')
+        kpi3.metric("Timely Responded Complaints", 'NA')
     
     try:
         kpi4.metric("Complaints with Closed Status", complaints_response_state[state_filter])
