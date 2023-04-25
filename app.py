@@ -251,10 +251,10 @@ def create_pie_chart(state):
     if state == 'ALL':
         submitted_via_count = df.groupby('submitted_via')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
         # Create pie chart
-        fig = px.pie(submitted_via_count, values=submitted_via_count['Number of Complaints'], names=submitted_via_count['submitted_via'], width = 500 , height=550, title='Number of Complaints by Submitted Via Channel')
+        fig = px.pie(submitted_via_count, values=submitted_via_count['Number of Complaints'], names=submitted_via_count['submitted_via'], width = 500 , height=500, title='Number of Complaints by Submitted Via Channel')
     else:
         submitted_via_count = df[df['state'] == state].groupby('submitted_via')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
-        fig = px.pie(submitted_via_count, values=submitted_via_count['Number of Complaints'], names=submitted_via_count['submitted_via'], width = 500 , height=550, title='Number of Complaints by Submitted Via Channel')
+        fig = px.pie(submitted_via_count, values=submitted_via_count['Number of Complaints'], names=submitted_via_count['submitted_via'], width = 500 , height=500, title='Number of Complaints by Submitted Via Channel')
     
     return fig
 
