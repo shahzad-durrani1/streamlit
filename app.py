@@ -203,6 +203,7 @@ state_mapping = {
 # Container 1: KPIs with State Filter
 
 with st.container():
+    st.set_page_config(layout="wide")
     # Add title and filter widgets
     st.title("KPIs")
     
@@ -329,6 +330,7 @@ def create_tree_map(state):
 
 # Container 2: Two charts side by side
 with st.container():
+    st.set_page_config(layout="wide")
     chart = create_prod_chart(state_filter)
     # Add two chart widgets side by side
     chart1, chart2 = st.columns([4,3])
@@ -344,6 +346,7 @@ with st.container():
 
 # Container 3: Two charts side by side
 with st.container():
+    st.set_page_config(layout="wide")
     # Add title
     st.title("Charts 3 and 4")
     
