@@ -278,7 +278,7 @@ def create_prod_chart(state):
     color=alt.Color('product', legend=None)
     ).properties(
     title='Number of Complaints by Product',
-    width=500,
+    width=600,
     height=400
     )
 
@@ -327,10 +327,10 @@ def create_pie_chart(state):
 def create_tree_map(state):
     if state == 'ALL':
         df_count = df.groupby(['issue', 'sub_issue'])['count of complaint_id'].sum().reset_index(name='Number of Complaints')
-        fig  = px.treemap(df_count, path=['issue', 'sub_issue'], values='Number of Complaints', title='Complaints by Issue and Sub-Issue')
+        fig  = px.treemap(df_count, path=['issue', 'sub_issue'], values='Number of Complaints', title='Complaints by Issue and Sub-Issue',width=500, height=400)
     else:
         df_count = df[df['state'] == state].groupby(['issue', 'sub_issue'])['count of complaint_id'].sum().reset_index(name='Number of Complaints')
-        fig  = px.treemap(df_count, path=['issue', 'sub_issue'], values='Number of Complaints', title='Complaints by Issue and Sub-Issue')
+        fig  = px.treemap(df_count, path=['issue', 'sub_issue'], values='Number of Complaints', title='Complaints by Issue and Sub-Issue', width=500, height=400)
 
     return fig
 
