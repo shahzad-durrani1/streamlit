@@ -205,13 +205,13 @@ st.set_page_config(layout="wide")
 with st.container():
     
     # Add title and filter widgets
-    st.title("KPIs")
-
-        
-    
-    
-    # Add KPI widgets with placeholder values
+    st.title("Consumer Financial Complaints Dashboard")
  
+
+
+    kpi1, kpi2, kpi3, kpi4, state_filter = st.columns([3,3,3,3,3])
+
+    
     state_filter = st.selectbox(
     'Select a state',
     sorted(state_mapping.keys()))
@@ -226,9 +226,6 @@ with st.container():
         st.subheader(f"Displaying Data for All States.")
     else:
         st.subheader(f"Displaying Data for {state_mapping[state_filter]}.")
-
-
-    kpi1, kpi2, kpi3, kpi4 = st.columns([3,3,3,3])
     
     
     
@@ -315,10 +312,10 @@ def create_pie_chart(state):
     if state == 'ALL':
         submitted_via_count = df.groupby('submitted_via')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
         # Create pie chart
-        fig = px.pie(submitted_via_count, values=submitted_via_count['Number of Complaints'], names=submitted_via_count['submitted_via'], width = 400 , height=700, title='Number of Complaints by Submitted Via Channel')
+        fig = px.pie(submitted_via_count, values=submitted_via_count['Number of Complaints'], names=submitted_via_count['submitted_via'], width = 500 , height=700, title='Number of Complaints by Submitted Via Channel')
     else:
         submitted_via_count = df[df['state'] == state].groupby('submitted_via')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
-        fig = px.pie(submitted_via_count, values=submitted_via_count['Number of Complaints'], names=submitted_via_count['submitted_via'], width = 400 , height=700, title='Number of Complaints by Submitted Via Channel')
+        fig = px.pie(submitted_via_count, values=submitted_via_count['Number of Complaints'], names=submitted_via_count['submitted_via'], width = 500 , height=700, title='Number of Complaints by Submitted Via Channel')
     
     return fig
 
@@ -327,10 +324,10 @@ def create_pie_chart(state):
 def create_tree_map(state):
     if state == 'ALL':
         df_count = df.groupby(['issue', 'sub_issue'])['count of complaint_id'].sum().reset_index(name='Number of Complaints')
-        fig  = px.treemap(df_count, path=['issue', 'sub_issue'], values='Number of Complaints', title='Complaints by Issue and Sub-Issue',width=500, height=700)
+        fig  = px.treemap(df_count, path=['issue', 'sub_issue'], values='Number of Complaints', title='Complaints by Issue and Sub-Issue',width=600, height=500)
     else:
         df_count = df[df['state'] == state].groupby(['issue', 'sub_issue'])['count of complaint_id'].sum().reset_index(name='Number of Complaints')
-        fig  = px.treemap(df_count, path=['issue', 'sub_issue'], values='Number of Complaints', title='Complaints by Issue and Sub-Issue', width=500, height=700)
+        fig  = px.treemap(df_count, path=['issue', 'sub_issue'], values='Number of Complaints', title='Complaints by Issue and Sub-Issue', width=600, height=500)
 
     return fig
 
