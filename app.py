@@ -311,7 +311,15 @@ def create_pie_chart(state):
 
 
 
-df_count = df.groupby(['issue', 'sub_issue'])['count of complaint_id'].sum().reset_index(name='Number of Complaints')
+def create_tree_map(state):
+    if state == 'ALL':
+        df_count = df.groupby(['issue', 'sub_issue'])['count of complaint_id'].sum().reset_index(name='Number of Complaints')
+        fig  = px.treemap(df_count, path=['issue', 'sub_issue'], values='Number of Complaints', title='Complaints by Issue and Sub-Issue')
+    else:
+        df_count = df[df['state'] == state].groupby(['issue', 'sub_issue'])['count of complaint_id'].sum().reset_index(name='Number of Complaints')
+        fig  = px.treemap(df_count, path=['issue', 'sub_issue'], values='Number of Complaints', title='Complaints by Issue and Sub-Issue')
+
+    return fig
 
 # Create Treemap
 
@@ -346,7 +354,7 @@ with st.container():
         fig = create_pie_chart(state_filter)
         st.plotly_chart(fig)
     with chart4:
-        fig = px.treemap(df_count, path=['issue', 'sub_issue'], values='Number of Complaints', branchvalues='Number of Complaints')
+        fig = create_tree_map(state_filter)
         st.plotly_chart(fig)
 
         
