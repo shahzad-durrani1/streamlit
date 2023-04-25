@@ -340,7 +340,7 @@ with st.container():
     st.title("Charts 3 and 4")
     
     # Add two chart widgets side by side
-    chart3, chart4 = st.columns([4,3])
+    chart3, chart4 = st.columns([3,4])
     with chart3:
         # st.subheader("Chart 3")
         fig = create_pie_chart(state_filter)
