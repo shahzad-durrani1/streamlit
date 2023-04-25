@@ -211,12 +211,11 @@ with st.container():
     
     
     # Add KPI widgets with placeholder values
-    state = st.columns(1)
-    with state:
-        state_filter = st.selectbox(
-        'Select a state',
-        sorted(state_mapping.keys()))
-        # try:
+ 
+    state_filter = st.selectbox(
+    'Select a state',
+    sorted(state_mapping.keys()))
+    # try:
         #     # Try to index the dataframe with the boolean series
         #       create_kpi_df(state_filter)
         # except pd.errors.IndexingError:
