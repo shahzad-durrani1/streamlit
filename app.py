@@ -209,7 +209,7 @@ with st.container():
     
     
     # Add KPI widgets with placeholder values
-    kpi1, kpi2, kpi3, kpi4, state = st.columns([3,3,5,3,3])
+    kpi1, kpi2, kpi3, kpi4, state = st.columns([3,3,4,3,3])
     with state:
         state_filter = st.selectbox(
         'Select a state',
@@ -233,7 +233,7 @@ with st.container():
         kpi2.metric("Complaints with Closed Status", 'NA')
     
     try:
-        kpi3.metric("% of Timely Responded Complaints", (complaints_timely_state[state_filter] / complaints_sum_state[state_filter] ) * 100)
+        kpi3.metric("% of Timely Responded Complaints", (complaints_timely_state[state_filter] / complaints_sum_state[state_filter] ) * 100, style={"white-space": "pre-wrap", "text-align": "center"})
     except KeyError:
         kpi3.metric("% of Timely Responded Complaints", 'NA')
     
