@@ -206,10 +206,12 @@ with st.container():
     
     # Add title and filter widgets
     st.title("KPIs")
+
+        
     
     
     # Add KPI widgets with placeholder values
-    kpi1, kpi2, kpi3, kpi4, state = st.columns([3,3,3,3,3])
+    state = st.columns(1)
     with state:
         state_filter = st.selectbox(
         'Select a state',
@@ -220,7 +222,17 @@ with st.container():
         # except pd.errors.IndexingError:
         #     # Catch the exception and handle it
         #     print("Error: Unalignable boolean series provided as indexer.")
-        
+    
+    if state_filter == 'ALL':
+        st.write(f"Displaying Data for All States.")
+    else:
+        st.write(f"Displaying Data for {state_mapping[state_filter]}.")
+
+
+    kpi1, kpi2, kpi3, kpi4 = st.columns([3,3,3,3])
+    
+    
+    
         
     try:
         kpi1.metric("Count of Complaints", complaints_sum_state[state_filter])
@@ -233,9 +245,9 @@ with st.container():
         kpi2.metric("Complaints with Closed Status", 'NA')
     
     try:
-        kpi3.metric("Timely Responded Complaints",  round((complaints_timely_state[state_filter] / complaints_sum_state[state_filter] ) * 100 , 2))
+        kpi3.metric("Timely Responded Complaints %",  round((complaints_timely_state[state_filter] / complaints_sum_state[state_filter] ) * 100 , 2))
     except KeyError:
-        kpi3.metric("Timely Responded Complaints", 'NA')
+        kpi3.metric("Timely Responded Complaints %", 'NA')
     
     try:
         kpi4.metric("Complaints with Closed Status", complaints_response_state[state_filter])
