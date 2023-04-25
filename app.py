@@ -346,7 +346,7 @@ with st.container():
         fig = create_pie_chart(state_filter)
         st.plotly_chart(fig)
     with chart4:
-        fig = px.treemap(df_count, path=['issue', 'sub_issue'], values='Number of Complaints' branchvalues='Number of Complaints')
+        fig = px.treemap(df_count, path=['issue', 'sub_issue'], values='Number of Complaints', branchvalues='Number of Complaints')
         st.plotly_chart(fig)
 
         
