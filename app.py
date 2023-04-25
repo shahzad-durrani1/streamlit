@@ -209,18 +209,19 @@ with st.container():
     
     
     # Add KPI widgets with placeholder values
-    kpi1, kpi2, kpi3, kpi4, state_filter = st.columns([7,7,7,7,5])
-    state_filter = st.selectbox(
-    'Select a state',
-    sorted(state_mapping.keys()))
-    # try:
-    #     # Try to index the dataframe with the boolean series
-    #       create_kpi_df(state_filter)
-    # except pd.errors.IndexingError:
-    #     # Catch the exception and handle it
-    #     print("Error: Unalignable boolean series provided as indexer.")
-    
-    
+    kpi1, kpi2, kpi3, kpi4, state = st.columns([4,4,4,7,5])
+    with state:
+        state_filter = st.selectbox(
+        'Select a state',
+        sorted(state_mapping.keys()))
+        # try:
+        #     # Try to index the dataframe with the boolean series
+        #       create_kpi_df(state_filter)
+        # except pd.errors.IndexingError:
+        #     # Catch the exception and handle it
+        #     print("Error: Unalignable boolean series provided as indexer.")
+        
+        
     try:
         kpi1.metric("Count of Complaints", complaints_sum_state[state_filter])
     except KeyError:
@@ -266,7 +267,7 @@ def create_prod_chart(state):
     color=alt.Color('product', legend=None)
     ).properties(
     title='Number of Complaints by Product',
-    width=350,
+    width=500,
     height=400
     )
 
@@ -290,7 +291,7 @@ def create_line_chart(state):
     y='Number of Complaints'
 ).properties(
     title='Number of Complaints by Month_Year',
-    width=350,
+    width=500,
     height=400
     )
         
