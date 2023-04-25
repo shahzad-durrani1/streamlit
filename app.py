@@ -347,7 +347,7 @@ with st.container():
         st.plotly_chart(fig)
     with chart4:
         fig = px.treemap(df_count, path=['issue', 'sub_issue'], values='Number of Complaints')
-        fig.show()
+        st.plotly_chart(fig)
 
         
 
