@@ -344,7 +344,7 @@ def create_tree_map(state):
 with st.container():
     chart = create_prod_chart(state_filter)
     # Add two chart widgets side by side
-    chart1, chart2 = st.columns([2,2])
+    chart1, chart2 = st.columns([5,4])
     with chart1:
         st.altair_chart(chart)
         # st.bar_chart(product_counts)
