@@ -29,38 +29,13 @@ df = pd.DataFrame(ws.get_all_records())
 
 
 
-# st.write(df.head(10))
 
 
-# Total Number of Complaints with Closed Status
-
-
-# % of Timely Responded Complaints
-
-# timely_yes = df.loc[df['timely'] == 'Yes']
-# complaints_sum_timely_yes = timely_yes['count of complaint_id'].sum()
-
-# print(complaints_sum_timely_yes)
-
-# print((complaints_sum_timely_yes / complaints_total) * 100)
-
-
-# Total Number of Complaints with In Progress Status
-
-# response_in_progress = df.loc[df['company_response'] == 'In progress']
-
-# complaints_sum_in_progress = response_in_progress['count of complaint_id'].sum()
-
-# print(complaints_sum_in_progress)
-
-# df_cols = ['complaints_sum', 'complaints_sum_closed', 'complaints_sum_timely_yes', 'complaints_sum_in_progress']
-# df_latest = pd.DataFrame(columns=df_cols)
-
+# Total Number of Complaints
 
 temp = df[df['state'] == 'AK'].groupby('product')['count of complaint_id'].sum()
 
 temp  = temp.to_dict()
-
 
 complaints_sum_state = df.groupby('state')['count of complaint_id'].sum()
 
@@ -70,6 +45,7 @@ complaints_sum_state['ALL'] = df['count of complaint_id'].sum()
 
 
 
+# Total Number of Complaints with Closed Status
 
 complaints_closed = df[df['company_response'].str.contains('closed', case=False)]
 
@@ -82,7 +58,7 @@ complaints_closed_state = complaints_closed_state.to_dict()
 complaints_closed_state['ALL'] = temp
 
 
-
+# % of Timely Responded Complaints
 timely_complaints = df[df['timely'] == 'Yes'].groupby('state')['count of complaint_id'].sum()
 
 temp = timely_complaints.sum()
@@ -91,6 +67,9 @@ complaints_timely_state = timely_complaints.to_dict()
 
 complaints_timely_state['ALL'] = temp 
 
+
+
+# Total Number of Complaints with In Progress Status
 
 in_progress_complaints = df[df['company_response'] == 'In progress'].groupby('state')['count of complaint_id'].sum()
 
@@ -101,40 +80,7 @@ complaints_response_state = in_progress_complaints.to_dict()
 complaints_response_state['ALL'] = temp 
 
 
-complaints_by_month = df[df['state'] == 'AL'].groupby('month_year')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
 
-
-# def create_kpi_df(state):
-#     print(state)
-   
-#     if state == 'ALL':
-#         print('here')
-        
-#         df_latest['complaints_sum'] = temp
-#         print(df_latest['complaints_sum'])
-
-#         # complaints_closed = df.loc[df['company_response'].str.contains('closed', case=False)]
-#         # temp= complaints_closed['count of complaint_id'].sum()
-#         # df_latest['complaints_sum_closed'] = temp
-        
-#         # print(df_latest['complaints_sum_closed'])
-
-
-#     else:
-        
-
-#         # complaints_closed_state = df.loc[(df['state'] == state) & (df['company_response'].str.contains('closed', case=False))]
-#         # df_latest['complaints_sum_closed'] = complaints_closed_state['count of complaint_id'].sum()
-#         # print(df_latest['complaints_sum_closed'])
-
-
-
-
-
-
-
-# Display the data in a Streamlit table
-# st.table(data)
 state_mapping = {
     'ALL':'All',
     'AL': 'Alabama',
@@ -198,6 +144,9 @@ state_mapping = {
     'WY': 'Wyoming'
 }
 
+
+# Streamlit app
+
 st.set_page_config(layout="wide")
 
 # Container 1: KPIs with State Filter
@@ -215,13 +164,6 @@ with st.container():
         state_filter = st.selectbox(
         'Select a state',
         sorted(state_mapping.keys()))
-        # try:
-            #     # Try to index the dataframe with the boolean series
-            #       create_kpi_df(state_filter)
-            # except pd.errors.IndexingError:
-            #     # Catch the exception and handle it
-            #     print("Error: Unalignable boolean series provided as indexer.")
-       
     
      
     if state_filter == 'ALL':
@@ -255,8 +197,7 @@ with st.container():
     
 
 
-
-
+# Functions to create charts
 def create_prod_chart(state):
 
 
@@ -281,12 +222,10 @@ def create_prod_chart(state):
 
     return chart
 
-# Display the chart in Streamlit
-
-# product_counts = df.groupby('product')['count of complaint_id'].count().sort_values(ascending=False)
 
 
 
+# Functions to create charts
 def create_line_chart(state):
     
     if state == 'ALL':
@@ -306,21 +245,21 @@ def create_line_chart(state):
     return chart
     
 
-
+# Functions to create charts
 def create_pie_chart(state):
     
     if state == 'ALL':
         submitted_via_count = df.groupby('submitted_via')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
         # Create pie chart
-        fig = px.pie(submitted_via_count, values=submitted_via_count['Number of Complaints'], names=submitted_via_count['submitted_via'], width = 500 , height=700, title='Number of Complaints by Submitted Via Channel')
+        fig = px.pie(submitted_via_count, values=submitted_via_count['Number of Complaints'], names=submitted_via_count['submitted_via'], width = 500 , height=550, title='Number of Complaints by Submitted Via Channel')
     else:
         submitted_via_count = df[df['state'] == state].groupby('submitted_via')['count of complaint_id'].sum().reset_index(name='Number of Complaints')
-        fig = px.pie(submitted_via_count, values=submitted_via_count['Number of Complaints'], names=submitted_via_count['submitted_via'], width = 500 , height=700, title='Number of Complaints by Submitted Via Channel')
+        fig = px.pie(submitted_via_count, values=submitted_via_count['Number of Complaints'], names=submitted_via_count['submitted_via'], width = 500 , height=550, title='Number of Complaints by Submitted Via Channel')
     
     return fig
 
 
-
+# Functions to create charts
 def create_tree_map(state):
     if state == 'ALL':
         df_count = df.groupby(['issue', 'sub_issue'])['count of complaint_id'].sum().reset_index(name='Number of Complaints')
@@ -331,23 +270,20 @@ def create_tree_map(state):
 
     return fig
 
-# Create Treemap
-
-
-# Show Treemap
 
 
 # Container 2: Two charts side by side
 with st.container():
     chart = create_prod_chart(state_filter)
+    
     # Add two chart widgets side by side
     chart1, chart2 = st.columns([5,4])
+
     with chart1:
         st.altair_chart(chart)
-        # st.bar_chart(product_counts)
+
     with chart2:
         complaints_by_month = create_line_chart(state_filter)
-        # st.subheader("Number of Complaints by Month_Year")
         st.altair_chart(complaints_by_month)
 
         
@@ -357,33 +293,12 @@ with st.container():
     
     # Add two chart widgets side by side
     chart3, chart4 = st.columns([2,2])
+   
     with chart3:
         # 
         fig = create_pie_chart(state_filter)
         st.plotly_chart(fig)
+    
     with chart4:
         fig = create_tree_map(state_filter)
         st.plotly_chart(fig)
-
-        
-
-
-# # Define the state filter dropdown
-# state_filter = st.selectbox(
-#     'Select a state',
-#     sorted(df['state'].unique())
-# )
-
-# # Filter the DataFrame by state if a state is selected in the dropdown
-# if state_filter:
-#     df = df.loc[df['state'] == state_filter]
-
-# # Display the total number of complaints and number of complaints per state
-# st.write('### Summary')
-# st.write('Total number of complaints:', len(df))
-# st.write('Number of complaints in', state_filter, ':', len(df))
-
-# # Display a bar chart of the number of complaints per sub-product in the selected state
-# st.write('### Number of complaints per sub-product in', state_filter)
-# chart_data = df['sub_product'].value_counts()
-# st.bar_chart(chart_data)
