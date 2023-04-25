@@ -209,7 +209,7 @@ with st.container():
     
     
     # Add KPI widgets with placeholder values
-    kpi1, kpi2, kpi3, kpi4, state = st.columns([4,4,4,7,5])
+    kpi1, kpi2, kpi3, kpi4, state = st.columns([3,3,5,3,3])
     with state:
         state_filter = st.selectbox(
         'Select a state',
