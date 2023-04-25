@@ -150,10 +150,7 @@ state_mapping = {
 st.set_page_config(layout="wide")
 
 # Container 1: KPIs with State Filter
-
 with st.container():
-    
-    # Add title and filter widgets
     st.title("Consumer Financial Complaints Dashboard")
  
 
@@ -206,10 +203,8 @@ def create_prod_chart(state):
     else:
         complaints_by_product = df[df['state'] == state].groupby('product')['count of complaint_id'].sum().reset_index(name='count')
 
-    # Sort the data in descending order of complaint count
     complaints_by_product = complaints_by_product.sort_values('count', ascending=False)
 
-    # Use Altair to create a horizontal bar chart
     chart = alt.Chart(complaints_by_product).mark_bar().encode(
     x='count',
     y=alt.Y('product', sort='-x'),
