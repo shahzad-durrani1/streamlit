@@ -223,9 +223,9 @@ with st.container():
         #     print("Error: Unalignable boolean series provided as indexer.")
     
     if state_filter == 'ALL':
-        st.write(f"Displaying Data for All States.")
+        st.subheader(f"Displaying Data for All States.")
     else:
-        st.write(f"Displaying Data for {state_mapping[state_filter]}.")
+        st.subheader(f"Displaying Data for {state_mapping[state_filter]}.")
 
 
     kpi1, kpi2, kpi3, kpi4 = st.columns([3,3,3,3])
@@ -361,7 +361,7 @@ with st.container():
     # Add two chart widgets side by side
     chart3, chart4 = st.columns([2,2])
     with chart3:
-        # st.subheader("Chart 3")
+        # 
         fig = create_pie_chart(state_filter)
         st.plotly_chart(fig)
     with chart4:
